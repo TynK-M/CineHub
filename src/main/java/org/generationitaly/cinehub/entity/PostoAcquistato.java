@@ -8,9 +8,9 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 
-@IdClass(PostoAcquistatoId.class)
 @Entity
 @Table(name = "posto_acquistato")
+@IdClass(PostoAcquistatoId.class)
 public class PostoAcquistato {
 
 	@Id
