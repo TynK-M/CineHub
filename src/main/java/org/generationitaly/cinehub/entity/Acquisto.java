@@ -30,9 +30,11 @@ public class Acquisto {
 	@ManyToOne
 	@JoinColumn(name = "id_utente", nullable = false)
 	private Utente utente;
+
 	@ManyToOne
 	@JoinColumn(name = "id_spettacolo", nullable = false)
 	private Spettacolo spettacolo;
+
 	@Column(name = "data_acquisto", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private LocalDateTime dataAcquisto = LocalDateTime.now(); // valore di default
 	
