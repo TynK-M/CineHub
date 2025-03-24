@@ -3,14 +3,15 @@ package org.generationitaly.cinehub.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Entity
-@Table(name = "posto",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"numero", "id_sala"})
-)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+
+@Entity
+@Table(name = "posto",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"numero", "id_sala"})
+)
 public class Posto {
 
     @Id
