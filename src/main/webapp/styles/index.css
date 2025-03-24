@@ -1,0 +1,34 @@
+#carosello {
+    padding-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 48%;
+}
+
+.carousel-inner {
+    width: 100%;
+    height: 350px; 
+    overflow: hidden; 
+}
+
+.carousel-item {
+    height: 100%; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-inner img {
+    width: 100%;
+    height: 100%;  
+    object-fit: cover; 
+    opacity: 0;
+    transition: opacity 0s linear;  
+}
+
+.carousel-item.active img {
+    opacity: 1; 
+}
