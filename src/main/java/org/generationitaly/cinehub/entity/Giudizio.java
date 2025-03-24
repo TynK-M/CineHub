@@ -61,7 +61,7 @@ public class Giudizio {
 	private LocalDateTime dataGiudizio;
 	
 	
-	
+	//commento
 	
 	
 }
