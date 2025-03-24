@@ -4,20 +4,12 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-/*
- * CREATE TABLE utente (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(50) NOT NULL, -- Nome dell'utente
-    cognome VARCHAR(50) NOT NULL, -- Cognome dell'utente
-    email VARCHAR(100) UNIQUE NOT NULL, -- Email unica
-    password VARCHAR(255) NOT NULL, -- Password cifrata
-    consenso_newsletter BOOLEAN DEFAULT FALSE, -- Se l'utente accetta di ricevere newsletter
-    data_registrazione DATETIME DEFAULT CURRENT_TIMESTAMP -- Data di registrazione automatica
-);
-
- * */
 
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "utente")
 public class Utente {
