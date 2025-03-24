@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence
+             https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
+             version="3.0">
+
+    <persistence-unit name="cinehub-unit" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <!-- Le entity -->
+        <class>org.generationitaly.cinehub.entity.Utente</class>
+        <class>org.generationitaly.cinehub.entity.Film</class>
+        <class>org.generationitaly.cinehub.entity.Sala</class>
+        <class>org.generationitaly.cinehub.entity.Spettacolo</class>
+        <class>org.generationitaly.cinehub.entity.Posto</class>
+        <class>org.generationitaly.cinehub.entity.Acquisto</class>
+        <class>org.generationitaly.cinehub.entity.PostoAcquistato</class>
+        <class>org.generationitaly.cinehub.entity.Giudizio</class>
+        <class>org.generationitaly.cinehub.entity.Newsletter</class>
+
+        <properties>
+            <!-- Dati connessione al DB -->
+            <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/portale_cinema?useSSL=false&amp;serverTimezone=UTC"/>
+            <property name="jakarta.persistence.jdbc.user" value="--- UTENTE ---"/>
+            <property name="jakarta.persistence.jdbc.password" value="--- PASSWORD ---"/>
+
+            <!-- Dialetto Hibernate -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+
+            <!-- NON modificare lo schema -->
+            <property name="hibernate.hbm2ddl.auto" value="validate"/>
+
+            <!-- Debug SQL -->
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+        </properties>
+    </persistence-unit>
+</persistence>
