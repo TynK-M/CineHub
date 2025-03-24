@@ -1,6 +1,8 @@
 package org.generationitaly.cinehub.repository;
 
-import jakarta.persistence.*;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.TypedQuery;
 import org.generationitaly.cinehub.entity.Utente;
 import org.generationitaly.cinehub.Util.JPAUtil;
 
@@ -31,7 +33,8 @@ public class UtenteRepository {
 
         try {
             em = JPAUtil.getEntityManager();
-            list = em.createQuery("SELECT u FROM Utente u", Utente.class).getResultList();
+            TypedQuery<Utente> query = em.createQuery("SELECT u FROM Utente u", Utente.class);
+            list = query.getResultList();
         } catch (Exception e) {
             System.err.println("Errore nel recuperare gli utenti: " + e.getMessage());
         } finally {
@@ -39,6 +42,27 @@ public class UtenteRepository {
         }
 
         return list;
+    }
+
+    public Utente findByEmail(String email) {
+        EntityManager em = null;
+        Utente utente = null;
+
+        try {
+            em = JPAUtil.getEntityManager();
+            TypedQuery<Utente> query = em.createQuery(
+                    "SELECT u FROM Utente u WHERE u.email = :email", Utente.class);
+            query.setParameter("email", email);
+            utente = query.getSingleResult();
+        } catch (NoResultException e) {
+            System.out.println("Nessun utente trovato con l'email: " + email);
+        } catch (Exception e) {
+            System.err.println("Errore nella ricerca per email: " + e.getMessage());
+        } finally {
+            if (em != null) em.close();
+        }
+
+        return utente;
     }
 
     public void save(Utente utente) {
@@ -88,24 +112,4 @@ public class UtenteRepository {
             if (em != null) em.close();
         }
     }
-
-    // Metodo aggiuntivo per trovare un utente per email
-    public Utente findByEmail(String email) {
-        EntityManager em = null;
-        Utente utente = null;
-
-        try {
-            em = JPAUtil.getEntityManager();
-            Query query = em.createQuery("SELECT u FROM Utente u WHERE u.email = :email", Utente.class);
-            query.setParameter("email", email);
-            utente = (Utente) query.getSingleResult();
-        } catch (Exception e) {
-            System.err.println("Errore nel trovare l'utente per email: " + e.getMessage());
-        } finally {
-            if (em != null) em.close();
-        }
-
-        return utente;
-    }
 }
- 
