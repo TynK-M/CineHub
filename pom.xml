@@ -58,16 +58,20 @@
       <version>4.13.1</version>
       <scope>test</scope>
     </dependency>
+
   </dependencies>
 
   <build>
     <finalName>cinehub</finalName>
     <plugins>
+
+      <!-- Compiler Plugin con Annotation Processing per Lombok -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.13.0</version>
         <configuration>
+          <release>17</release>
           <annotationProcessorPaths>
             <path>
               <groupId>org.projectlombok</groupId>
@@ -75,20 +79,16 @@
               <version>1.18.36</version>
             </path>
           </annotationProcessorPaths>
-          <release>17</release>
         </configuration>
       </plugin>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.13.0</version>
-        <configuration>
-          <release>17</release>
-        </configuration>
-      </plugin>
+
+      <!-- Plugin per generare .war -->
       <plugin>
         <artifactId>maven-war-plugin</artifactId>
         <version>3.4.0</version>
       </plugin>
+
     </plugins>
   </build>
+
 </project>
