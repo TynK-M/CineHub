@@ -1,4 +1,4 @@
-package org.generationitaly.cinehub.util;
+package org.generationitaly.cinehub.Util;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
