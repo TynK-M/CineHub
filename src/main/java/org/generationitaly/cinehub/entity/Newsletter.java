@@ -4,18 +4,6 @@ import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
 import lombok.*;
-import java.time.LocalDate;
-
-/*
- *CREATE TABLE `newsletter` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `oggetto` varchar(100) NOT NULL,
-  `messaggio` text NOT NULL,
-  `data_invio` datetime DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-)
- */
-
 
 @Data
 @NoArgsConstructor
@@ -39,7 +27,4 @@ public class Newsletter {
 	
 	@Column(name = "data_invio", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP") 
 	private LocalDateTime dataInvio = LocalDateTime.now();
-	
-	
-	
 }

@@ -19,10 +19,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+
 @Entity
 @Table(name = "acquisto")
 public class Acquisto {
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -36,6 +36,5 @@ public class Acquisto {
 	private Spettacolo spettacolo;
 
 	@Column(name = "data_acquisto", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-	private LocalDateTime dataAcquisto = LocalDateTime.now(); // valore di default
-	
+	private LocalDateTime dataAcquisto = LocalDateTime.now();
 }

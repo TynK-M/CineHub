@@ -1,30 +1,25 @@
 package org.generationitaly.cinehub.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-
+import jakarta.persistence.*;
+import lombok.*;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+
+@IdClass(PostoAcquistatoId.class)
 @Entity
-@Table(name="posto_acquistato")
+@Table(name = "posto_acquistato")
 public class PostoAcquistato {
 
-	@OneToOne
-	@JoinColumn(name = "id_acquisto" )
-	private Integer idAcquisto;
-	
-	@OneToOne
-	@JoinColumn(name="ad_posto" )
-	private Integer idPosto;
-	
+	@Id
+	@ManyToOne
+	@JoinColumn(name = "id_acquisto")
+	private Acquisto acquisto;
+
+	@Id
+	@ManyToOne
+	@JoinColumn(name = "id_posto")
+	private Posto posto;
 }
