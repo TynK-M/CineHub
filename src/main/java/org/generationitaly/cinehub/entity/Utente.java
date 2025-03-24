@@ -30,7 +30,7 @@ public class Utente {
 	@Column(name = "password", nullable = false, length=255)
 	private String password;
 
-	@Column(name = "consenso_newsletter", columnDefinition = "TIMYINT(1) DEFAULT 0")
+	@Column(name = "consenso_newsletter", columnDefinition = "TINYINT(1) DEFAULT 0")
 	private Boolean consensoNewsletter;
 
 	@Column(name = "data_registrazione", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
