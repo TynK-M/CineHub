@@ -1,3 +1,12 @@
+/*
+Styling intestazione
+*/
+div.intestazione h2{
+	text-align: center;
+}
+/*
+Styling carosello
+*/
 #carosello {
     padding-top: 15px;
     display: flex;
@@ -31,4 +40,11 @@
 
 .carousel-item.active img {
     opacity: 1; 
+}
+
+/*
+Styling galleria film
+*/
+#galleria-film{
+	padding-top: 15px;
 }
