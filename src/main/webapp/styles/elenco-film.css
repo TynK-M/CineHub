@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+/*COLONNA CENTRALE-SCHEDE FILM*/
+div.carta {
+	width: 18rem;
+	margin: 10px;
+	display: flex;
+	float: right;
+	justify-content: center;
+	background-color: #AD3434;
+	color: white;
+	
+}
+
+
+
+/*COLONNA DI DESTRA-FILTRI*/
+div.cont{
+	margin-top: 20px;
+	border: 1px solid white;
+	border-radius: 4%;
+	padding: 20px;
+	background-color:#AD3434;
+	
+}
+div.linea-bottom{
+	border-bottom: 1px solid white;
+	margin-bottom: 10px ;
+}
+
+ul.lista-filtri{
+	list-style-type: none;
+}
+
+div.colore-scritte{
+	color: white;
+}
