@@ -1,6 +1,7 @@
 package org.generationitaly.cinehub.repository;
 
 import jakarta.persistence.EntityManager;
+import org.generationitaly.cinehub.entity.Acquisto;
 import org.generationitaly.cinehub.entity.PostoAcquistato;
 import org.generationitaly.cinehub.entity.PostoAcquistatoId;
 import org.generationitaly.cinehub.Util.JPAUtil;
@@ -73,4 +74,25 @@ public class PostoAcquistatoRepository {
             if (em != null) em.close();
         }
     }
+
+    public void deleteByAcquisto(Acquisto acquisto) {
+        EntityManager em = null;
+
+        try {
+            em = JPAUtil.getEntityManager();
+            em.getTransaction().begin();
+
+            em.createQuery("DELETE FROM PostoAcquistato p WHERE p.acquisto = :acquisto")
+                    .setParameter("acquisto", acquisto)
+                    .executeUpdate();
+
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em != null && em.getTransaction().isActive()) em.getTransaction().rollback();
+            System.err.println("Errore nell'eliminare i posti per l'acquisto: " + e.getMessage());
+        } finally {
+            if (em != null) em.close();
+        }
+    }
+
 }

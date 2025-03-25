@@ -1,9 +1,12 @@
 package org.generationitaly.cinehub.repository;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
+import org.generationitaly.cinehub.entity.Film;
 import org.generationitaly.cinehub.entity.Giudizio;
 import org.generationitaly.cinehub.Util.JPAUtil;
+import org.generationitaly.cinehub.entity.Utente;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +22,46 @@ public class GiudizioRepository {
 			giudizio = em.find(Giudizio.class, id);
 		} catch (Exception e) {
 			System.err.println("Errore nel recuperare il giudizio: " + e.getMessage());
+		} finally {
+			if (em != null) em.close();
+		}
+
+		return giudizio;
+	}
+
+	public List<Giudizio> findByFilm(Film film) {
+		EntityManager em = null;
+		List<Giudizio> lista = new ArrayList<>();
+
+		try {
+			em = JPAUtil.getEntityManager();
+			lista = em.createQuery("SELECT g FROM Giudizio g WHERE g.film = :film", Giudizio.class)
+					.setParameter("film", film)
+					.getResultList();
+		} catch (Exception e) {
+			System.err.println("Errore nel recuperare i giudizi del film: " + e.getMessage());
+		} finally {
+			if (em != null) em.close();
+		}
+
+		return lista;
+	}
+
+	public Giudizio findByUtenteAndFilm(Utente utente, Film film) {
+		EntityManager em = null;
+		Giudizio giudizio = null;
+
+		try {
+			em = JPAUtil.getEntityManager();
+			giudizio = em.createQuery(
+							"SELECT g FROM Giudizio g WHERE g.utente = :utente AND g.film = :film", Giudizio.class)
+					.setParameter("utente", utente)
+					.setParameter("film", film)
+					.getSingleResult();
+		} catch (NoResultException e) {
+			// Nessuna recensione trovata
+		} catch (Exception e) {
+			System.err.println("Errore nel trovare il giudizio: " + e.getMessage());
 		} finally {
 			if (em != null) em.close();
 		}

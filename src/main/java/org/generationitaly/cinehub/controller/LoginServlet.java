@@ -27,7 +27,7 @@ public class LoginServlet extends HttpServlet {
             response.sendRedirect("home.jsp");
         } else {
             request.setAttribute("erroreLogin", "Email o password errati.");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            response.sendRedirect("login.jsp");
         }
     }
 }
