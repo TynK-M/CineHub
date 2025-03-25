@@ -45,6 +45,10 @@
 							<p class="card-text">Some quick example text to build on the
 								card title and make up the bulk of the card's content.</p>
 							<a href="#" class="btn btn-outline-light">Dettaglio film</a>
+							<div class="quad-stella">
+							<img style="width: 20px;display: flex;float: right;" alt="" src="images/stella.png">
+							<p  style="width: 20px;display: flex;float: right;margin-right: 25px">Voto </p>
+							</div>
 
 						</div>
 
