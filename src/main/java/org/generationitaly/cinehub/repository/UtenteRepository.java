@@ -65,6 +65,28 @@ public class UtenteRepository {
         return utente;
     }
 
+    public Utente findByEmailAndPassword(String email, String password) {
+        EntityManager em = null;
+        Utente utente = null;
+
+        try {
+            em = JPAUtil.getEntityManager();
+            TypedQuery<Utente> query = em.createQuery(
+                    "SELECT u FROM Utente u WHERE u.email = :email AND u.password = :password", Utente.class);
+            query.setParameter("email", email);
+            query.setParameter("password", password);
+            utente = query.getSingleResult();
+        } catch (NoResultException e) {
+            System.out.println("Nessun utente trovato con le credenziali fornite.");
+        } catch (Exception e) {
+            System.err.println("Errore nella ricerca per email e password: " + e.getMessage());
+        } finally {
+            if (em != null) em.close();
+        }
+
+        return utente;
+    }
+
     public void save(Utente utente) {
         EntityManager em = null;
 
