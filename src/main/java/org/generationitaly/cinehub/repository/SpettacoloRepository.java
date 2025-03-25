@@ -16,7 +16,13 @@ public class SpettacoloRepository {
 
         try {
             em = JPAUtil.getEntityManager();
-            spettacolo = em.find(Spettacolo.class, id);
+            spettacolo = em.createQuery(
+                            "SELECT s FROM Spettacolo s " +
+                                    "JOIN FETCH s.film " +
+                                    "JOIN FETCH s.sala " +
+                                    "WHERE s.id = :id", Spettacolo.class)
+                    .setParameter("id", id)
+                    .getSingleResult();
         } catch (Exception e) {
             System.err.println("Errore nel recuperare lo spettacolo con ID " + id + ": " + e.getMessage());
         } finally {
@@ -24,6 +30,71 @@ public class SpettacoloRepository {
         }
 
         return spettacolo;
+    }
+
+    public Spettacolo findByIdWithFetch(int id) {
+        EntityManager em = null;
+        Spettacolo s = null;
+        try {
+            em = JPAUtil.getEntityManager();
+            TypedQuery<Spettacolo> query = em.createQuery(
+                    "SELECT sp FROM Spettacolo sp " +
+                            "JOIN FETCH sp.film " +
+                            "JOIN FETCH sp.sala " +
+                            "WHERE sp.id = :id", Spettacolo.class
+            );
+            query.setParameter("id", id);
+            s = query.getSingleResult();
+        } finally {
+            if (em != null) em.close();
+        }
+        return s;
+    }
+
+    public boolean existsByFilm(int filmId) {
+        EntityManager em = null;
+        try {
+            em = JPAUtil.getEntityManager();
+            Long count = em.createQuery(
+                            "SELECT COUNT(s) FROM Spettacolo s WHERE s.film.id = :filmId",
+                            Long.class
+                    )
+                    .setParameter("filmId", filmId)
+                    .getSingleResult();
+
+            return count > 0;
+        } finally {
+            if (em != null) em.close();
+        }
+    }
+
+    public List<Spettacolo> findByTitoloOrData(String titolo, String data) {
+        EntityManager em = null;
+        List<Spettacolo> result = new ArrayList<>();
+
+        try {
+            em = JPAUtil.getEntityManager();
+
+            String jpql = "SELECT s FROM Spettacolo s " +
+                    "JOIN FETCH s.film " +
+                    "JOIN FETCH s.sala " +
+                    "WHERE (:titolo IS NULL OR LOWER(s.film.titolo) LIKE LOWER(CONCAT('%', :titolo, '%'))) " +
+                    "AND (:data IS NULL OR s.data = :data)";
+
+            TypedQuery<Spettacolo> query = em.createQuery(jpql, Spettacolo.class);
+
+            query.setParameter("titolo", titolo != null && !titolo.isBlank() ? titolo : null);
+            query.setParameter("data", data != null && !data.isBlank() ? java.sql.Date.valueOf(data) : null);
+
+            result = query.getResultList();
+
+        } catch (Exception e) {
+            System.err.println("Errore nella ricerca degli spettacoli: " + e.getMessage());
+        } finally {
+            if (em != null) em.close();
+        }
+
+        return result;
     }
 
     public List<Spettacolo> findAll() {

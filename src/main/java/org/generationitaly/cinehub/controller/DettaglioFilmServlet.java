@@ -11,6 +11,7 @@ import org.generationitaly.cinehub.entity.Giudizio;
 import org.generationitaly.cinehub.entity.Utente;
 import org.generationitaly.cinehub.repository.FilmRepository;
 import org.generationitaly.cinehub.repository.GiudizioRepository;
+import org.generationitaly.cinehub.repository.SpettacoloRepository;
 
 @WebServlet("/DettaglioFilmServlet")
 public class DettaglioFilmServlet extends HttpServlet {
@@ -19,6 +20,7 @@ public class DettaglioFilmServlet extends HttpServlet {
 
     private final FilmRepository filmRepository = new FilmRepository();
     private final GiudizioRepository giudizioRepository = new GiudizioRepository();
+    private final SpettacoloRepository spettacoloRepository = new SpettacoloRepository(); // aggiunto
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -44,7 +46,7 @@ public class DettaglioFilmServlet extends HttpServlet {
             return;
         }
 
-        // ✅ Conversione YouTube "watch?v=" → "embed/"
+        // Conversione YouTube "watch?v=" → "embed/"
         if (film.getLinkTrailer() != null && film.getLinkTrailer().contains("watch?v=")) {
             String embedLink = film.getLinkTrailer().replace("watch?v=", "embed/");
             // Rimuove eventuali parametri successivi (es: &pp=...)
@@ -55,6 +57,7 @@ public class DettaglioFilmServlet extends HttpServlet {
             film.setLinkTrailer(embedLink);
         }
 
+        // Carica i giudizi
         List<Giudizio> giudizi = giudizioRepository.findByFilm(film);
 
         HttpSession session = request.getSession(false);
@@ -67,10 +70,15 @@ public class DettaglioFilmServlet extends HttpServlet {
             haGiaCommentato = (giudizio != null);
         }
 
+        // Verifica se il film è presente in una delle 4 sale
+        boolean filmInSala = spettacoloRepository.existsByFilm(film.getId());
+
+        // Passa i dati alla JSP
         request.setAttribute("film", film);
         request.setAttribute("giudizi", giudizi);
         request.setAttribute("isUtenteLoggato", isUtenteLoggato);
         request.setAttribute("haGiaCommentato", haGiaCommentato);
+        request.setAttribute("filmInSala", filmInSala);
 
         request.getRequestDispatcher("dettaglioFilm.jsp").forward(request, response);
     }

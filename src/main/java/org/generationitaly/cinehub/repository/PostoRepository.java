@@ -26,6 +26,37 @@ public class PostoRepository {
         return posto;
     }
 
+    public List<Posto> findAllBySala(int idSala) {
+        EntityManager em = JPAUtil.getEntityManager();
+        try {
+            return em.createQuery(
+                    "SELECT p FROM Posto p WHERE p.sala.id = :idSala ORDER BY p.numero",
+                    Posto.class
+            ).setParameter("idSala", idSala).getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<Posto> findDisponibiliPerSpettacolo(int idSpettacolo) {
+        EntityManager em = JPAUtil.getEntityManager();
+        try {
+            return em.createQuery(
+                            "SELECT p FROM Posto p " +
+                                    "WHERE p.sala.id = (" +
+                                    "   SELECT s.sala.id FROM Spettacolo s WHERE s.id = :idSpettacolo" +
+                                    ") AND p.id NOT IN (" +
+                                    "   SELECT pa.posto.id FROM PostoAcquistato pa WHERE pa.acquisto.spettacolo.id = :idSpettacolo" +
+                                    ") ORDER BY p.numero",
+                            Posto.class
+                    )
+                    .setParameter("idSpettacolo", idSpettacolo)
+                    .getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
     public List<Posto> findAll() {
         EntityManager em = null;
         List<Posto> list = new ArrayList<>();

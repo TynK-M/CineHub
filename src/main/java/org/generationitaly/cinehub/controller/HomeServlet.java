@@ -38,7 +38,7 @@ public class HomeServlet extends HttpServlet {
         request.setAttribute("nazioni", nazioni);
         request.setAttribute("genereSelezionato", genere);
         request.setAttribute("nazioneSelezionata", nazione);
-        request.setAttribute("titoloRicerca", titolo); // ✅ Passa anche questo
+        request.setAttribute("titoloRicerca", titolo);
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 

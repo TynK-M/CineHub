@@ -65,7 +65,10 @@
         <ul class="list-group mt-3">
             <c:forEach var="g" items="${giudizi}">
                 <li class="list-group-item">
-                    <strong><a href="ProfiloServlet?id=${g.utente.id}">${g.utente.nome} ${g.utente.cognome}</a>:
+                    <strong>
+                        <a href="ProfiloServlet?id=${g.utente.id}">
+                                ${g.utente.nome} ${g.utente.cognome}
+                        </a>:
                     </strong>
                     <span>
                         <c:forEach begin="1" end="5" var="i">
@@ -105,15 +108,23 @@
             <button type="submit" class="btn btn-primary">Invia commento</button>
         </form>
     </c:if>
-
     <c:if test="${isUtenteLoggato and haGiaCommentato}">
         <p class="mt-4 text-muted">Hai già lasciato un commento per questo film.</p>
     </c:if>
-
     <c:if test="${not isUtenteLoggato}">
-        <p class="mt-4 text-muted">Devi <a href="login.jsp">accedere</a> per lasciare un commento.</p>
+        <p class="mt-4 text-muted">Devi <a href="autenticazione/login.jsp">accedere</a> per lasciare un commento.</p>
     </c:if>
 
+    <!-- Pulsante Prenota -->
+    <c:if test="${isUtenteLoggato and not haGiaCommentato}">
+        <c:if test="${filmInSala}">
+            <div class="text-center mt-5">
+                <a href="ListaSpettacoliServlet?filmId=${film.id}" class="btn btn-success btn-lg">
+                    Prenota questo film
+                </a>
+            </div>
+        </c:if>
+    </c:if>
 </div>
 
 <%@ include file="componenti/footer.jsp" %>
