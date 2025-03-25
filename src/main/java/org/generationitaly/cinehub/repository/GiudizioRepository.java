@@ -31,21 +31,23 @@ public class GiudizioRepository {
 
 	public List<Giudizio> findByFilm(Film film) {
 		EntityManager em = null;
-		List<Giudizio> lista = new ArrayList<>();
+		List<Giudizio> giudizi = null;
 
 		try {
 			em = JPAUtil.getEntityManager();
-			lista = em.createQuery("SELECT g FROM Giudizio g WHERE g.film = :film", Giudizio.class)
+			// JOIN FETCH per caricare anche l'utente
+			giudizi = em.createQuery("SELECT g FROM Giudizio g JOIN FETCH g.utente WHERE g.film = :film", Giudizio.class)
 					.setParameter("film", film)
 					.getResultList();
 		} catch (Exception e) {
-			System.err.println("Errore nel recuperare i giudizi del film: " + e.getMessage());
+			System.err.println("Errore nel recuperare i giudizi: " + e.getMessage());
 		} finally {
 			if (em != null) em.close();
 		}
 
-		return lista;
+		return giudizi;
 	}
+
 
 	public Giudizio findByUtenteAndFilm(Utente utente, Film film) {
 		EntityManager em = null;

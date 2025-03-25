@@ -17,9 +17,9 @@ public class HomeServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        List<Film> filmList = filmRepo.findAll(); // metodo che recupera tutti i film
+        List<Film> filmList = filmRepo.findAll();
         request.setAttribute("filmList", filmList);
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 }
+
