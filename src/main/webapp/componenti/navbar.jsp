@@ -27,6 +27,10 @@
 				<form class="d-flex" role="search">
 					<button class="btn btn-outline-success" type="submit">Accedi</button>
 				</form>
+				<form class="d-flex" role="search">
+					<button class="btn btn-outline-success" type="submit">Registrati</button>
+				</form>
+
 			</div>
 		</div>
 	</nav>

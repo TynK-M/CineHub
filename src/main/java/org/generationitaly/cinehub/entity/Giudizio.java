@@ -33,7 +33,7 @@ public class Giudizio {
 	@Column (columnDefinition = "TEXT")
 	private String commento;
 	
-	@Column(name ="data_giudizio", nullable =false)
-	private LocalDateTime dataGiudizio;
+	@Column(name ="data_giudizio")
+	private LocalDateTime dataGiudizio = LocalDateTime.now();
 
 }
