@@ -13,22 +13,36 @@ import java.time.LocalDate;
 @Table(name= "film")
 public class Film {
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
-    @Column (name= "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column (name = "titolo" , nullable = false, length = 100)
+    @Column(nullable = false, length = 100)
     private String titolo;
 
-    @Column(name = "descrizione", columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT")
     private String descrizione;
 
     @Column(name = "link_trailer", length = 255)
     private String linkTrailer;
 
-    @Column(name = "durata", nullable = false)
+    @Column(nullable = false)
     private int durata;
 
     @Column(name = "data_uscita")
     private LocalDate dataUscita;
+
+    @Column(length = 255)
+    private String locandina;
+
+    @Column(length = 50)
+    private String genere;
+
+    @Column(nullable = false, length = 50)
+    private String nazione;
+
+    @Column(nullable = false)
+    private boolean vintage;
+
+    @Column(name = "check_uscita", nullable = false)
+    private boolean checkUscita;
 }

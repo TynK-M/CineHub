@@ -82,8 +82,7 @@
 		<c:forEach var="film" items="${filmList}">
 			<div class="col-lg-4 col-md-6 mb-4">
 				<div class="card h-100 shadow-sm">
-					<img src="https://www.place-hold.it/500x300"
-						 class="card-img-top"
+					<img src="${film.locandina}" class="card-img-top"
 						 alt="${film.titolo}" style="height: 250px; object-fit: cover;">
 					<div class="card-body">
 						<h5 class="card-title">${film.titolo}</h5>
