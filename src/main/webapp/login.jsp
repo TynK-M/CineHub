@@ -67,7 +67,7 @@
 			if (errore != null) {
 			%>
 			<%-- <span class="error"><%= errore %></span> --%>
-			<span class="error">Oops...credenziali errate!</span>
+			<span class="error">credenziali errate</span>
 			<% } %>
 		</form>	
     <p>Non hai un account? <a href="register.jsp">Registrati</a></p>
