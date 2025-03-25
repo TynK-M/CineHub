@@ -24,10 +24,12 @@ public class LoginServlet extends HttpServlet {
         if (utente != null && PasswordUtil.checkPassword(password, utente.getPassword())) {
             HttpSession session = request.getSession();
             session.setAttribute("utente", utente);
-            response.sendRedirect("home.jsp");
+            response.sendRedirect("HomeServlet");
         } else {
+            System.out.println("LOGIN: email=" + email + ", utente=" + utente);
             request.setAttribute("erroreLogin", "Email o password errati.");
-            response.sendRedirect("login.jsp");
+            request.getRequestDispatcher("autenticazione/login.jsp").forward(request, response); // <- cambia qui
         }
+
     }
 }

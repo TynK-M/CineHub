@@ -50,20 +50,18 @@ public class UtenteRepository {
 
         try {
             em = JPAUtil.getEntityManager();
-            TypedQuery<Utente> query = em.createQuery(
-                    "SELECT u FROM Utente u WHERE u.email = :email", Utente.class);
+            TypedQuery<Utente> query = em.createQuery("SELECT u FROM Utente u WHERE u.email = :email", Utente.class);
             query.setParameter("email", email);
             utente = query.getSingleResult();
         } catch (NoResultException e) {
-            System.out.println("Nessun utente trovato con l'email: " + email);
-        } catch (Exception e) {
-            System.err.println("Errore nella ricerca per email: " + e.getMessage());
+            utente = null; // <-- IMPORTANTE
         } finally {
             if (em != null) em.close();
         }
 
         return utente;
     }
+
 
     public Utente findByEmailAndPassword(String email, String password) {
         EntityManager em = null;

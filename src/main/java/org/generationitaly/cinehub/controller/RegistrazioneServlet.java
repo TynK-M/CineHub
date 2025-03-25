@@ -15,24 +15,32 @@ public class RegistrazioneServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-
-        //ricorda che solo un email puo registrarsi alla volta.
-
-
         String nome = request.getParameter("nome");
         String cognome = request.getParameter("cognome");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
+        UtenteRepository repo = new UtenteRepository();
+        Utente utenteEsistente = repo.findByEmail(email);
+
+        if (utenteEsistente != null) {
+            request.setAttribute("erroreRegistrazione", "Questa email è già registrata.");
+            request.getRequestDispatcher("autenticazione/register.jsp").forward(request, response);
+            return;
+        }
+
         Utente utente = new Utente();
         utente.setNome(nome);
         utente.setCognome(cognome);
         utente.setEmail(email);
-        utente.setPassword(PasswordUtil.hashPassword(password)); // <-- HASH
+        utente.setPassword(PasswordUtil.hashPassword(password));
 
-        UtenteRepository repo = new UtenteRepository();
+        // Controlla se è stato selezionato il consenso alla newsletter
+        String newsletterParam = request.getParameter("newsletter");
+        utente.setConsensoNewsletter(newsletterParam != null); // true se presente
+
         repo.save(utente);
 
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("autenticazione/login.jsp");
     }
 }

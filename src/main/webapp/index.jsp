@@ -22,6 +22,12 @@
 <!-- NAVBAR -->
 <%@include file="componenti/navbar.jsp" %>
 
+<c:if test="${not empty sessionScope.utente}">
+	<div class="alert alert-success text-center m-0 rounded-0">
+		Benvenuto, <strong>${sessionScope.utente.nome}</strong>!
+	</div>
+</c:if>
+
 <!-- Intestazione -->
 <div class="intestazione">
 	<h2>Prossimamente in uscita</h2>
