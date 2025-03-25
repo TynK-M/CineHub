@@ -11,9 +11,9 @@
         <properties>
             <!-- Dati connessione al DB -->
             <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/cinema?useSSL=false&amp;serverTimezone=UTC"/>
-            <property name="jakarta.persistence.jdbc.user" value="root"/>
-            <property name="jakarta.persistence.jdbc.password" value="Papera1209"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/<__URL DB__>?useSSL=false&amp;serverTimezone=UTC"/>
+            <property name="jakarta.persistence.jdbc.user" value="__ UTENTE __"/>
+            <property name="jakarta.persistence.jdbc.password" value="__ PASSWORD __"/>
 
             <!-- Dialetto Hibernate -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
