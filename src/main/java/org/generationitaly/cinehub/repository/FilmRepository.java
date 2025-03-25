@@ -25,6 +25,45 @@ public class FilmRepository {
         return film;
     }
 
+    public List<String> findGeneriDistinct() {
+        EntityManager em = JPAUtil.getEntityManager();
+        return em.createQuery("SELECT DISTINCT f.genere FROM Film f WHERE f.genere IS NOT NULL", String.class)
+                .getResultList();
+    }
+
+    public List<String> findNazioniDistinct() {
+        EntityManager em = JPAUtil.getEntityManager();
+        return em.createQuery("SELECT DISTINCT f.nazione FROM Film f", String.class)
+                .getResultList();
+    }
+
+
+    public List<Film> findByGenereAndNazione(String genere, String nazione) {
+        EntityManager em = null;
+        List<Film> list = new ArrayList<>();
+
+        try {
+            em = JPAUtil.getEntityManager();
+            TypedQuery<Film> query = em.createQuery(
+                    "SELECT f FROM Film f WHERE " +
+                            "(:genere IS NULL OR f.genere = :genere) AND " +
+                            "(:nazione IS NULL OR f.nazione = :nazione)", Film.class);
+            query.setParameter("genere", genere.isEmpty() ? null : genere);
+            query.setParameter("nazione", nazione.isEmpty() ? null : nazione);
+            list = query.getResultList();
+        } finally {
+            if (em != null) em.close();
+        }
+
+        return list;
+    }
+
+    public List<Film> findInUscita() {
+        EntityManager em = JPAUtil.getEntityManager();
+        return em.createQuery("SELECT f FROM Film f WHERE f.checkUscita = true", Film.class).getResultList();
+    }
+
+
     public List<Film> findAll() {
         EntityManager em = null;
         List<Film> list = new ArrayList<>();
