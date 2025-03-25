@@ -8,17 +8,6 @@
     <persistence-unit name="cinehub-unit" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <!-- Le entity -->
-        <class>org.generationitaly.cinehub.entity.Utente</class>
-        <class>org.generationitaly.cinehub.entity.Film</class>
-        <class>org.generationitaly.cinehub.entity.Sala</class>
-        <class>org.generationitaly.cinehub.entity.Spettacolo</class>
-        <class>org.generationitaly.cinehub.entity.Posto</class>
-        <class>org.generationitaly.cinehub.entity.Acquisto</class>
-        <class>org.generationitaly.cinehub.entity.PostoAcquistato</class>
-        <class>org.generationitaly.cinehub.entity.Giudizio</class>
-        <class>org.generationitaly.cinehub.entity.Newsletter</class>
-
         <properties>
             <!-- Dati connessione al DB -->
             <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
