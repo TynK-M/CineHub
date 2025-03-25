@@ -33,48 +33,69 @@
 	<h2>Prossimamente in uscita</h2>
 </div>
 
-<!-- Carosello -->
-<div id="carosello" style="padding-bottom: 15px">
-	<div id="carouselExampleIndicators" class="carousel slide">
-		<div class="carousel-indicators">
-			<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-					aria-current="true" aria-label="Slide 1"></button>
-			<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-					aria-label="Slide 2"></button>
-			<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-					aria-label="Slide 3"></button>
-		</div>
-		<div class="carousel-inner">
-			<div class="carousel-item active">
-				<img src="images/dark-knight-rises-movie-poster-banner-catwoman.jpg"
-					 class="d-block w-100" alt="..." style="width: 100%; max-height: 350px;">
+<!-- Carosello dinamico dei film in uscita -->
+<div id="carosello" class="carousel slide mb-5" data-bs-ride="carousel">
+	<div class="carousel-inner">
+		<c:forEach var="film" items="${filmUscita}" varStatus="status">
+			<div class="carousel-item ${status.first ? 'active' : ''}">
+				<a href="DettaglioFilmServlet?id=${film.id}">
+					<img src="${film.locandina}" class="d-block w-100" alt="${film.titolo}"
+						 style="max-height: 600px; object-fit: cover;">
+				</a>
+				<div class="bg-dark text-light text-center py-3">
+					<h4 class="m-0">
+						<a href="DettaglioFilmServlet?id=${film.id}" class="text-light text-decoration-none">
+								${film.titolo}
+						</a>
+					</h4>
+				</div>
 			</div>
-			<div class="carousel-item">
-				<img src="images/mark-wahlberg-mark-wahlberg-john-ted.jpg"
-					 class="d-block w-100" alt="..." style="width: 100%; max-height: 350px;">
-			</div>
-			<div class="carousel-item">
-				<img src="images/the-big-lebowski-movie-poster.jpg"
-					 class="d-block w-100" alt="..." style="width: 100%; max-height: 350px;">
-			</div>
-		</div>
-		<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-				data-bs-slide="prev">
-			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-			<span class="visually-hidden">Precedente</span>
-		</button>
-		<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-				data-bs-slide="next">
-			<span class="carousel-control-next-icon" aria-hidden="true"></span>
-			<span class="visually-hidden">Successivo</span>
-		</button>
+		</c:forEach>
 	</div>
+	<button class="carousel-control-prev" type="button" data-bs-target="#carosello" data-bs-slide="prev">
+		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		<span class="visually-hidden">Precedente</span>
+	</button>
+	<button class="carousel-control-next" type="button" data-bs-target="#carosello" data-bs-slide="next">
+		<span class="carousel-control-next-icon" aria-hidden="true"></span>
+		<span class="visually-hidden">Successivo</span>
+	</button>
 </div>
+
 
 <!-- Scegli il film -->
 <div class="intestazione">
 	<h2>Scegli il film</h2>
 </div>
+
+<!-- Filtro -->
+<div class="container mb-4">
+	<form method="get" action="HomeServlet" class="row g-3 align-items-end">
+		<div class="col-md-4">
+			<label for="genere" class="form-label">Genere</label>
+			<select name="genere" id="genere" class="form-select">
+				<option value="">Tutti</option>
+				<c:forEach var="g" items="${generi}">
+					<option value="${g}" ${g == genereSelezionato ? "selected" : ""}>${g}</option>
+				</c:forEach>
+			</select>
+		</div>
+		<div class="col-md-4">
+			<label for="nazione" class="form-label">Nazione</label>
+			<select name="nazione" id="nazione" class="form-select">
+				<option value="">Tutte</option>
+				<c:forEach var="n" items="${nazioni}">
+					<option value="${n}" ${n == nazioneSelezionata ? "selected" : ""}>${n}</option>
+				</c:forEach>
+			</select>
+		</div>
+		<div class="col-md-4">
+			<button type="submit" class="btn btn-primary">Filtra</button>
+			<a href="HomeServlet" class="btn btn-secondary">Reset</a>
+		</div>
+	</form>
+</div>
+
 
 <!-- Film dinamici -->
 <div class="container">
