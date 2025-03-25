@@ -21,11 +21,13 @@ public class HomeServlet extends HttpServlet {
 
         String genere = request.getParameter("genere");
         String nazione = request.getParameter("nazione");
+        String titolo = request.getParameter("titolo");
 
         if (genere == null) genere = "";
         if (nazione == null) nazione = "";
+        if (titolo == null) titolo = "";
 
-        List<Film> filmList = filmRepo.findByGenereAndNazione(genere, nazione);
+        List<Film> filmList = filmRepo.findByFiltri(genere, nazione, titolo);
         List<Film> filmUscita = filmRepo.findInUscita();
         List<String> generi = filmRepo.findGeneriDistinct();
         List<String> nazioni = filmRepo.findNazioniDistinct();
@@ -36,10 +38,9 @@ public class HomeServlet extends HttpServlet {
         request.setAttribute("nazioni", nazioni);
         request.setAttribute("genereSelezionato", genere);
         request.setAttribute("nazioneSelezionata", nazione);
-
+        request.setAttribute("titoloRicerca", titolo); // ✅ Passa anche questo
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
-
 
 }
 

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark" data-bs-theme="dark">
 	<div class="container-fluid">
 		<a class="navbar-brand" href="HomeServlet">Cine Hub</a>
 		<button class="navbar-toggler" type="button"
@@ -7,13 +7,17 @@
 				aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
+
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<!-- Menu di navigazione -->
 			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-				<li class="nav-item"><a class="nav-link active"
-										aria-current="page" href="HomeServlet">Homepage</a></li>
-				<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#" role="button"
-						data-bs-toggle="dropdown" aria-expanded="false"> Film </a>
+				<li class="nav-item">
+					<a class="nav-link" href="HomeServlet">Home</a>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+						Film
+					</a>
 					<ul class="dropdown-menu">
 						<li><a class="dropdown-item" href="#">Nelle sale</a></li>
 						<li><a class="dropdown-item" href="#">Prossimamente</a></li>
@@ -23,25 +27,31 @@
 				</li>
 			</ul>
 
-			<%-- Mostra pulsanti diversi se l'utente è loggato --%>
-			<c:choose>
-				<c:when test="${not empty sessionScope.utente}">
-		<span class="navbar-text me-3 text-light">
-			Ciao, ${sessionScope.utente.nome}!
-		</span>
-					<form class="d-flex" action="${pageContext.request.contextPath}/LogoutServlet" method="get">
-						<button class="btn btn-outline-danger" type="submit">Logout</button>
-					</form>
-				</c:when>
-				<c:otherwise>
-					<form class="d-flex me-2" action="${pageContext.request.contextPath}/autenticazione/login.jsp" method="get">
-						<button class="btn btn-outline-success" type="submit">Accedi</button>
-					</form>
-					<form class="d-flex" action="${pageContext.request.contextPath}/autenticazione/register.jsp" method="get">
-						<button class="btn btn-outline-primary" type="submit">Registrati</button>
-					</form>
-				</c:otherwise>
-			</c:choose>
+			<!-- Sezione utente -->
+			<ul class="navbar-nav mb-2 mb-lg-0">
+				<c:choose>
+					<c:when test="${not empty sessionScope.utente}">
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+							   data-bs-toggle="dropdown" aria-expanded="false">
+								Ciao, ${sessionScope.utente.nome}!
+							</a>
+							<ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="userDropdown">
+								<li><a class="dropdown-item" href="ProfiloServlet">Profilo</a></li>
+								<li><a class="dropdown-item" href="LogoutServlet">Logout</a></li>
+							</ul>
+						</li>
+					</c:when>
+					<c:otherwise>
+						<li class="nav-item">
+							<a class="btn btn-outline-success me-2" href="autenticazione/login.jsp">Accedi</a>
+						</li>
+						<li class="nav-item">
+							<a class="btn btn-outline-primary" href="autenticazione/register.jsp">Registrati</a>
+						</li>
+					</c:otherwise>
+				</c:choose>
+			</ul>
 		</div>
 	</div>
 </nav>

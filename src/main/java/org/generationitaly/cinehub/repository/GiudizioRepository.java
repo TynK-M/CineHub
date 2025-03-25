@@ -48,6 +48,24 @@ public class GiudizioRepository {
 		return giudizi;
 	}
 
+	public List<Giudizio> findByUtente(Utente utente) {
+		EntityManager em = null;
+		List<Giudizio> giudizi = new ArrayList<>();
+
+		try {
+			em = JPAUtil.getEntityManager();
+			giudizi = em.createQuery(
+							"SELECT g FROM Giudizio g JOIN FETCH g.film WHERE g.utente = :utente", Giudizio.class)
+					.setParameter("utente", utente)
+					.getResultList();
+		} catch (Exception e) {
+			System.err.println("Errore nel recuperare i giudizi per utente: " + e.getMessage());
+		} finally {
+			if (em != null) em.close();
+		}
+
+		return giudizi;
+	}
 
 	public Giudizio findByUtenteAndFilm(Utente utente, Film film) {
 		EntityManager em = null;

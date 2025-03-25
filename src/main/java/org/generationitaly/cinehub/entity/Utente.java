@@ -36,4 +36,7 @@ public class Utente {
 	@Column(name = "data_registrazione", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private LocalDateTime dataRegistrazione = LocalDateTime.now();
 
+	@Column(name = "foto_profilo", length = 255)
+	private String fotoProfilo;
+
 }

@@ -65,7 +65,8 @@
         <ul class="list-group mt-3">
             <c:forEach var="g" items="${giudizi}">
                 <li class="list-group-item">
-                    <strong>${g.utente.nome} ${g.utente.cognome}:</strong>
+                    <strong><a href="ProfiloServlet?id=${g.utente.id}">${g.utente.nome} ${g.utente.cognome}</a>:
+                    </strong>
                     <span>
                         <c:forEach begin="1" end="5" var="i">
                             <c:choose>

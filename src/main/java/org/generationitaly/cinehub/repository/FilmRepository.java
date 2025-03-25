@@ -37,8 +37,7 @@ public class FilmRepository {
                 .getResultList();
     }
 
-
-    public List<Film> findByGenereAndNazione(String genere, String nazione) {
+    public List<Film> findByFiltri(String genere, String nazione, String titolo) {
         EntityManager em = null;
         List<Film> list = new ArrayList<>();
 
@@ -47,9 +46,13 @@ public class FilmRepository {
             TypedQuery<Film> query = em.createQuery(
                     "SELECT f FROM Film f WHERE " +
                             "(:genere IS NULL OR f.genere = :genere) AND " +
-                            "(:nazione IS NULL OR f.nazione = :nazione)", Film.class);
+                            "(:nazione IS NULL OR f.nazione = :nazione) AND " +
+                            "(:titolo IS NULL OR LOWER(f.titolo) LIKE LOWER(CONCAT('%', :titolo, '%')))",
+                    Film.class);
             query.setParameter("genere", genere.isEmpty() ? null : genere);
             query.setParameter("nazione", nazione.isEmpty() ? null : nazione);
+            query.setParameter("titolo", titolo.isEmpty() ? null : titolo);
+
             list = query.getResultList();
         } finally {
             if (em != null) em.close();

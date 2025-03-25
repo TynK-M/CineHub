@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-		 pageEncoding="utf-8"%>
 <footer class="text-center text-lg-start bg-dark text-light" data-bs-theme="dark">
 	<!-- Social media -->
 	<section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
