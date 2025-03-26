@@ -85,7 +85,7 @@
         </ul>
     </c:if>
     <c:if test="${empty giudizi}">
-        <p class="text-muted mt-3">Nessun commento ancora presente.</p>
+        <p class="text-muted mt-3" style="color: white !important;">Nessun commento ancora presente.</p>
     </c:if>
 
     <!-- Form commento -->
@@ -112,7 +112,7 @@
         <p class="mt-4 text-muted">Hai già lasciato un commento per questo film.</p>
     </c:if>
     <c:if test="${not isUtenteLoggato}">
-        <p class="mt-4 text-muted">Devi <a href="autenticazione/login.jsp">accedere</a> per lasciare un commento.</p>
+        <p class="mt-4 text-muted" style="color: white !important;">Devi <a href="autenticazione/login.jsp">accedere</a> per lasciare un commento.</p>
     </c:if>
 
     <!-- Pulsante Prenota -->
