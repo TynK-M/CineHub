@@ -20,6 +20,7 @@
                         <li><a class="dropdown-item" href="#">Vintage</a></li>
                     </ul>
                 </li>
+                 
             </ul>
 
             <!-- Sezione utente -->
@@ -34,6 +35,7 @@
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark"
                                 aria-labelledby="userDropdown">
                                 <li><a class="dropdown-item" href="ProfiloServlet">Profilo</a></li>
+                                <li ><a class="dropdown-item" href="MieiAcquistiServlet"> Acquisti</a></li>
                                 <li><a class="dropdown-item" href="LogoutServlet">Logout</a></li>
                             </ul>
                         </li>
