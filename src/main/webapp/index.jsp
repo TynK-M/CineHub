@@ -53,6 +53,7 @@
 				class="visually-hidden">Successivo</span>
 		</button>
 	</div>
+
 	<!-- Testo dinamico titolo film -->
 	<div id="film-info" class="text-center bg-dark text-light py-3">
 		<h4 class="m-0">

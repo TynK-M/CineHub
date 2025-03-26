@@ -20,17 +20,38 @@
     <h1 class="mb-3">${film.titolo}</h1>
     <p class="mb-4">${film.descrizione}</p>
 
+    <!-- Sezione pulsanti: Aggiungi a wishlist + Acquista biglietto -->
+    <div class="mb-3">
+        <c:if test="${isUtenteLoggato}">
+            <a href="AggiungiWatchlistServlet?filmId=${film.id}"
+               class="btn btn-outline-warning me-2">
+                Aggiungi a wishlist
+            </a>
+        </c:if>
+        <c:if test="${filmInSala and isUtenteLoggato}">
+            <a href="ListaSpettacoliServlet?filmId=${film.id}"
+               class="btn btn-success">
+                Acquista biglietto
+            </a>
+        </c:if>
+    </div>
+
     <!-- Locandina + Trailer -->
     <div class="row mb-4">
         <div class="col-md-6">
             <c:if test="${not empty film.locandina}">
-                <img src="${film.locandina}" class="img-fluid rounded shadow" alt="Locandina ${film.titolo}">
+                <img src="${film.locandina}"
+                     class="img-fluid rounded shadow"
+                     alt="Locandina ${film.titolo}">
             </c:if>
         </div>
         <div class="col-md-6">
             <c:if test="${not empty film.linkTrailer}">
                 <div class="ratio ratio-16x9">
-                    <iframe src="${film.linkTrailer}" title="Trailer" allowfullscreen></iframe>
+                    <iframe src="${film.linkTrailer}"
+                            title="Trailer"
+                            allowfullscreen>
+                    </iframe>
                 </div>
             </c:if>
         </div>
@@ -73,8 +94,12 @@
                     <span>
                         <c:forEach begin="1" end="5" var="i">
                             <c:choose>
-                                <c:when test="${i <= g.stelle}">⭐</c:when>
-                                <c:otherwise>☆</c:otherwise>
+                                <c:when test="${i <= g.stelle}">
+                                    ⭐
+                                </c:when>
+                                <c:otherwise>
+                                    ☆
+                                </c:otherwise>
                             </c:choose>
                         </c:forEach>
                     </span>
@@ -85,7 +110,9 @@
         </ul>
     </c:if>
     <c:if test="${empty giudizi}">
-        <p class="text-muted mt-3" style="color: white !important;">Nessun commento ancora presente.</p>
+        <p class="text-muted mt-3" style="color: white !important;">
+            Nessun commento ancora presente.
+        </p>
     </c:if>
 
     <!-- Form commento -->
@@ -108,27 +135,22 @@
             <button type="submit" class="btn btn-primary">Invia commento</button>
         </form>
     </c:if>
-    <c:if  test="${isUtenteLoggato and haGiaCommentato}">
-        <p  class="mt-4 text-muted " ><span style="color: white;">Hai già lasciato un commento per questo film.</span></p>
+    <c:if test="${isUtenteLoggato and haGiaCommentato}">
+        <p class="mt-4 text-muted">
+            <span style="color: white;">
+                Hai già lasciato un commento per questo film.
+            </span>
+        </p>
     </c:if>
     <c:if test="${not isUtenteLoggato}">
-        <p class="mt-4 text-muted" style="color: white !important;">Devi <a href="autenticazione/login.jsp">accedere</a> per lasciare un commento.</p>
+        <p class="mt-4 text-muted" style="color: white !important;">
+            Devi <a href="autenticazione/login.jsp">accedere</a> per lasciare un commento.
+        </p>
     </c:if>
 
-    <!-- Pulsante Prenota -->
-    <c:if test="${isUtenteLoggato and not haGiaCommentato}">
-        <c:if test="${filmInSala}">
-            <div class="text-center mt-5">
-                <a href="ListaSpettacoliServlet?filmId=${film.id}" class="btn btn-success btn-lg">
-                    Prenota questo film
-                </a>
-            </div>
-        </c:if>
-    </c:if>
 </div>
 
 <%@ include file="componenti/footer.jsp" %>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

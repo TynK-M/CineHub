@@ -6,7 +6,13 @@
 <head>
   <title>Modifica Acquisto - ${acquisto.spettacolo.film.titolo}</title>
   <!-- Bootstrap -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <!-- Bootstrap -->
+  <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+  <!-- Stili -->
+  <link href="styles/global.css" rel="stylesheet">
+  <link href="styles/index.css" rel="stylesheet">
   <style>
     .seat-grid {
       display: grid;

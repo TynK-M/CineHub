@@ -15,7 +15,19 @@
 	<link href="../styles/login.css" rel="stylesheet">
 </head>
 <body>
-	<%@ include file="../componenti/navbar.jsp"%>
+	<!-- Navbar inclusa direttamente nella pagina di login -->
+	<nav class="navbar navbar-expand-lg bg-dark navbar-dark" data-bs-theme="dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="${pageContext.request.contextPath}/HomeServlet">CineHub</a>
+			<button class="navbar-toggler" type="button"
+					data-bs-toggle="collapse"
+					data-bs-target="#navbarSupportedContent"
+					aria-controls="navbarSupportedContent"
+					aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+		</div>
+	</nav>
 
 	<div class="container mt-5">
 		<div class="header">

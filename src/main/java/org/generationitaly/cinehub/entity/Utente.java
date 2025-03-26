@@ -4,11 +4,11 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
 
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+
 @Entity
 @Table(name = "utente")
 public class Utente {
