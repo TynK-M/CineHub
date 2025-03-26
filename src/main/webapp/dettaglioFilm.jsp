@@ -108,8 +108,8 @@
             <button type="submit" class="btn btn-primary">Invia commento</button>
         </form>
     </c:if>
-    <c:if test="${isUtenteLoggato and haGiaCommentato}">
-        <p class="mt-4 text-muted">Hai già lasciato un commento per questo film.</p>
+    <c:if  test="${isUtenteLoggato and haGiaCommentato}">
+        <p  class="mt-4 text-muted " ><span style="color: white;">Hai già lasciato un commento per questo film.</span></p>
     </c:if>
     <c:if test="${not isUtenteLoggato}">
         <p class="mt-4 text-muted" style="color: white !important;">Devi <a href="autenticazione/login.jsp">accedere</a> per lasciare un commento.</p>
