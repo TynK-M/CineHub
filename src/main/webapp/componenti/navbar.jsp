@@ -20,6 +20,7 @@
                         <li><a class="dropdown-item" href="#">Vintage</a></li>
                     </ul>
                 </li>
+                 <li class="nav-item"><a class="nav-link"  href="ListaSpettacoliServlet"> Spettacoli</a></li>
                  
             </ul>
 
