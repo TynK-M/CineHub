@@ -12,13 +12,9 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Menu di navigazione -->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/ListaSpettacoliServlet">
-                        Spettacoli
-                    </a>
-                    <a class="nav-link" href="${pageContext.request.contextPath}/ListaSpettacoliServlet">
-                        Spettacoli
-                    </a>
+                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/ListaSpettacoliServlet">Spettacoli</a>
+                <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/FilmVintageServlet">Film riproposti</a>
+
                 </li>
             </ul>
 

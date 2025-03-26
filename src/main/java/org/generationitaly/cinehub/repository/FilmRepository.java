@@ -66,6 +66,24 @@ public class FilmRepository {
         return em.createQuery("SELECT f FROM Film f WHERE f.checkUscita = true", Film.class).getResultList();
     }
 
+    public List<Film> findAllVintage() {
+        EntityManager em = null;
+        List<Film> list = new ArrayList<>();
+        try {
+            em = JPAUtil.getEntityManager();
+            // Supponendo che l'attributo nell'Entity Film si chiami `vintage` (boolean)
+            TypedQuery<Film> query = em.createQuery(
+                    "SELECT f FROM Film f WHERE f.vintage = true", Film.class
+            );
+            list = query.getResultList();
+        } catch (Exception e) {
+            System.err.println("Errore nel recuperare i film vintage: " + e.getMessage());
+        } finally {
+            if (em != null) em.close();
+        }
+        return list;
+    }
+
 
     public List<Film> findAll() {
         EntityManager em = null;
