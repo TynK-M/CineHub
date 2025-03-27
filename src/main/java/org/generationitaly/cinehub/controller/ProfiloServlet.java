@@ -25,6 +25,7 @@ public class ProfiloServlet extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession(false);
+
         Utente sessionUser = (session != null) ? (Utente) session.getAttribute("utente") : null;
 
         String idParam = request.getParameter("id");

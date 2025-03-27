@@ -39,4 +39,7 @@ public class Utente {
 	@Column(name = "foto_profilo", length = 255)
 	private String fotoProfilo;
 
+	@Column(name = "admin")
+	private Boolean admin;
+
 }

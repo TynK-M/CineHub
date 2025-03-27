@@ -20,12 +20,12 @@
     <h1 class="mb-3">${film.titolo}</h1>
     <p class="mb-4">${film.descrizione}</p>
 
-    <!-- Sezione pulsanti: Aggiungi a wishlist + Acquista biglietto -->
+    <!-- Sezione pulsanti: Aggiungi a watchlist + Acquista biglietto -->
     <div class="mb-3">
         <c:if test="${isUtenteLoggato}">
             <a href="AggiungiWatchlistServlet?filmId=${film.id}"
                class="btn btn-outline-warning me-2">
-                Aggiungi a wishlist
+                Aggiungi a Watchlist
             </a>
         </c:if>
         <c:if test="${filmInSala and isUtenteLoggato}">

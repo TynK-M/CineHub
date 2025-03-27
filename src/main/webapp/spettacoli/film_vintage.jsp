@@ -17,7 +17,7 @@
 <%@ include file="../componenti/navbar.jsp" %>
 
 <div class="container mt-5">
-  <h2 class="text-center mb-4">Film Vintage</h2>
+  <h2 class="text-center mb-4">Film Riposti</h2>
 
   <c:if test="${empty filmVintage}">
     <p class="text-center">Nessun film vintage trovato.</p>
@@ -27,13 +27,7 @@
     <div class="card bg-light text-dark mb-3">
       <div class="card-body">
         <h5 class="card-title">${film.titolo}</h5>
-        <p class="card-text">
-          <!-- Qui puoi aggiungere altre informazioni sul film, come regista, anno, ecc. -->
-          <strong>ID:</strong> ${film.id} <br>
-          <strong>Vintage:</strong> ${film.vintage}
-        </p>
-        <!-- Esempio: link per mostrare maggiori dettagli sul film -->
-        <a href="#" class="btn btn-primary">Dettagli</a>
+        <a href="DettaglioFilmServlet?id=${film.id}" class="btn btn-outline-warning me-2">Dettagli</a>
       </div>
     </div>
   </c:forEach>
