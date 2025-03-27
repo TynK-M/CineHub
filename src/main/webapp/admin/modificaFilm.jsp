@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ include file="../componenti/navbar.jsp" %>
 <%
   String basePath = request.getContextPath();
 %>
@@ -12,12 +13,11 @@
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Stili -->
-  <link href="<%= basePath %>/styles/global.css" rel="stylesheet">
-  <link href="<%= basePath %>/styles/index.css" rel="stylesheet">
+  <link href="styles/global.css" rel="stylesheet">
+  <link href="styles/index.css" rel="stylesheet">
+  <link href="styles/global.css" rel="stylesheet">
 </head>
 <body class="bg-dark text-light">
-
-<jsp:include page="/componenti/navbar.jsp" />
 
 <div class="container mt-5">
   <h2 class="mb-4">Lista Film</h2>
@@ -38,7 +38,7 @@
         <td>${film.nazione}</td>
         <td class="d-flex gap-2">
           <!-- Bottone Modifica -->
-          <a href="<%= basePath %>/ModificaSingoloFilmServlet?id=${film.id}" class="btn btn-warning btn-sm">Modifica</a>
+          <a href="<%= basePath %>/ModificaSingoloFilmServlet?id=${film.id}" class="btn btn-warning">Modifica</a>
 
           <!-- Bottone Elimina -->
           <form action="<%= basePath %>/EliminaFilmServlet" method="post" onsubmit="return confirm('Sei sicuro di voler eliminare questo film?');">
