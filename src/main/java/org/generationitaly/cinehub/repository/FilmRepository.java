@@ -27,7 +27,7 @@ public class FilmRepository {
 
     public List<String> findGeneriDistinct() {
         EntityManager em = JPAUtil.getEntityManager();
-        return em.createQuery("SELECT DISTINCT f.genere FROM Film f WHERE f.genere IS NOT NULL", String.class)
+        return em.createQuery("SELECT DISTINCT f.genere.nome FROM Film f WHERE f.genere IS NOT NULL", String.class)
                 .getResultList();
     }
 
@@ -45,10 +45,11 @@ public class FilmRepository {
             em = JPAUtil.getEntityManager();
             TypedQuery<Film> query = em.createQuery(
                     "SELECT f FROM Film f WHERE " +
-                            "(:genere IS NULL OR f.genere = :genere) AND " +
+                            "(:genere IS NULL OR f.genere.nome = :genere) AND " +
                             "(:nazione IS NULL OR f.nazione = :nazione) AND " +
                             "(:titolo IS NULL OR LOWER(f.titolo) LIKE LOWER(CONCAT('%', :titolo, '%')))",
                     Film.class);
+
             query.setParameter("genere", genere.isEmpty() ? null : genere);
             query.setParameter("nazione", nazione.isEmpty() ? null : nazione);
             query.setParameter("titolo", titolo.isEmpty() ? null : titolo);
@@ -60,6 +61,7 @@ public class FilmRepository {
 
         return list;
     }
+
 
     public List<Film> findInUscita() {
         EntityManager em = JPAUtil.getEntityManager();
@@ -132,6 +134,7 @@ public class FilmRepository {
             if (em != null) em.close();
         }
     }
+
 
     public void delete(Film film) {
         EntityManager em = null;

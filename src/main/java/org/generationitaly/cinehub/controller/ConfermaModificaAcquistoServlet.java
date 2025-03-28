@@ -78,7 +78,7 @@ public class ConfermaModificaAcquistoServlet extends HttpServlet {
             if (em != null) em.close();
         }
 
-        // 9. Redirect o forward dove vuoi
+
         res.sendRedirect("MieiAcquistiServlet");
     }
 }

@@ -30,7 +30,7 @@ public class AcquistoRepository {
         List<Acquisto> list = new ArrayList<>();
         try {
             em = JPAUtil.getEntityManager();
-            // Se vuoi caricare anche lo spettacolo e il film associato, usa JOIN FETCH:
+            // Se vuoi caricare anche lo spettacolo e il film associato
             TypedQuery<Acquisto> query = em.createQuery(
                     "SELECT a FROM Acquisto a " +
                             "JOIN FETCH a.spettacolo s " +

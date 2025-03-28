@@ -34,8 +34,9 @@ public class Film {
     @Column(length = 255)
     private String locandina;
 
-    @Column(length = 50)
-    private String genere;
+    @ManyToOne
+    @JoinColumn(name = "id_genere")
+    private Genere genere;
 
     @Column(nullable = false, length = 50)
     private String nazione;
