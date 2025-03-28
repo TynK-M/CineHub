@@ -24,4 +24,5 @@ public class Posto {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_sala", nullable = false)
     private Sala sala;
+
 }

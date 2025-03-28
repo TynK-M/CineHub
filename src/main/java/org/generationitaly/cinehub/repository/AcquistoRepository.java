@@ -25,27 +25,20 @@ public class AcquistoRepository {
         return acquisto;
     }
 
-    public List<Acquisto> findByUtente(int idUtente) {
-        EntityManager em = null;
-        List<Acquisto> list = new ArrayList<>();
-        try {
-            em = JPAUtil.getEntityManager();
-            // Se vuoi caricare anche lo spettacolo e il film associato
-            TypedQuery<Acquisto> query = em.createQuery(
-                    "SELECT a FROM Acquisto a " +
-                            "JOIN FETCH a.spettacolo s " +
-                            "JOIN FETCH s.film " +      // Così potrai vedere a.spettacolo.film.titolo
-                            "WHERE a.utente.id = :idUtente",
-                    Acquisto.class
-            );
-            query.setParameter("idUtente", idUtente);
-            list = query.getResultList();
-        } catch (Exception e) {
-            System.err.println("Errore in findByUtente: " + e.getMessage());
-        } finally {
-            if (em != null) em.close();
-        }
-        return list;
+    public List<Acquisto> findByUtente(int utenteId) {
+        EntityManager em = JPAUtil.getEntityManager();
+        List<Acquisto> acquisti = em.createQuery(
+                "SELECT DISTINCT a FROM Acquisto a " +
+                        "JOIN FETCH a.spettacolo s " +
+                        "JOIN FETCH s.film " +
+                        "JOIN FETCH s.sala sala " + // forza caricamento sala
+                        "LEFT JOIN FETCH a.postiAcquistati pa " +
+                        "LEFT JOIN FETCH pa.posto p " +
+                        "LEFT JOIN FETCH p.sala " + // forza caricamento sala del posto (non necessaria ma ok)
+                        "WHERE a.utente.id = :id", Acquisto.class
+        ).setParameter("id", utenteId).getResultList();
+        em.close();
+        return acquisti;
     }
 
     public Acquisto findByIdWithFetch(int id) {

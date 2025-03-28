@@ -1,5 +1,10 @@
-<%@ page contentType="text/html; charset=utf-8" %>
-<html>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ include file="../componenti/navbar.jsp" %>
+<%
+  String basePath = request.getContextPath();
+%>
+<!DOCTYPE html>
 <head>
   <title>Acquisto confermato</title>
   <!-- Bootstrap -->
@@ -9,9 +14,9 @@
   <!-- Stili -->
   <link href="styles/global.css" rel="stylesheet">
   <link href="styles/index.css" rel="stylesheet">
+  <link href="styles/global.css" rel="stylesheet">
 </head>
 <body class="bg-dark text-light">
-<%@ include file="../componenti/navbar.jsp" %>
 
 <div class="container my-5 text-center">
   <h2>Grazie per il tuo acquisto!</h2>
