@@ -55,7 +55,11 @@
     </select>
     <div class="mb-3">
       <label class="form-label">Nazione</label>
-      <input type="text" name="nazione" class="form-control">
+      <select name="nazioneId" class="form-select" required>
+        <c:forEach var="nazione" items="${nazioni}">
+          <option value="${nazione.id}">${nazione.nome}</option>
+        </c:forEach>
+      </select>
     </div>
     <div class="form-check form-switch mb-3">
       <input class="form-check-input" type="checkbox" name="vintage">

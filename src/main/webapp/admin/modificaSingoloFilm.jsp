@@ -70,7 +70,13 @@
 
     <div class="mb-3">
       <label class="form-label">Nazione</label>
-      <input type="text" name="nazione" class="form-control" value="${film.nazione}">
+      <select name="nazioneId" class="form-select" required>
+        <c:forEach var="nazione" items="${nazioni}">
+          <option value="${nazione.id}" ${nazione.id == film.nazione.id ? "selected" : ""}>
+              ${nazione.nome}
+          </option>
+        </c:forEach>
+      </select>
     </div>
 
     <div class="form-check form-switch mb-3">

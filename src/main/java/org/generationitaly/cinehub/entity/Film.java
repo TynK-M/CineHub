@@ -38,8 +38,9 @@ public class Film {
     @JoinColumn(name = "id_genere")
     private Genere genere;
 
-    @Column(nullable = false, length = 50)
-    private String nazione;
+    @ManyToOne
+    @JoinColumn(name = "id_nazione")
+    private Nazione nazione;
 
     @Column(nullable = false)
     private boolean vintage;

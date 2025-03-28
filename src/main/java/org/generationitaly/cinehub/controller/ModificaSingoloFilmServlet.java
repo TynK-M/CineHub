@@ -5,8 +5,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import org.generationitaly.cinehub.entity.Film;
 import org.generationitaly.cinehub.entity.Genere;
-import org.generationitaly.cinehub.repository.FilmRepository;
+import org.generationitaly.cinehub.entity.Nazione;
 import org.generationitaly.cinehub.repository.GenereRepository;
+import org.generationitaly.cinehub.repository.NazioneRepository;
+import org.generationitaly.cinehub.repository.FilmRepository;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -15,8 +17,9 @@ import java.util.List;
 @WebServlet("/ModificaSingoloFilmServlet")
 public class ModificaSingoloFilmServlet extends HttpServlet {
 
-    private final GenereRepository genereRepository = new GenereRepository();
     private final FilmRepository filmRepository = new FilmRepository();
+    private final GenereRepository genereRepository = new GenereRepository();
+    private final NazioneRepository nazioneRepository = new NazioneRepository();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -26,9 +29,12 @@ public class ModificaSingoloFilmServlet extends HttpServlet {
 
         Film film = filmRepository.findById(id);
         List<Genere> generi = genereRepository.findAll();
+        List<Nazione> nazioni = nazioneRepository.findAll();
 
         req.setAttribute("film", film);
         req.setAttribute("generi", generi);
+        req.setAttribute("nazioni", nazioni);
+
         req.getRequestDispatcher("/admin/modificaSingoloFilm.jsp").forward(req, resp);
     }
 
@@ -47,9 +53,13 @@ public class ModificaSingoloFilmServlet extends HttpServlet {
         film.setLocandina(req.getParameter("locandina"));
 
         int genereId = Integer.parseInt(req.getParameter("genereId"));
-        film.setGenere(genereRepository.findById(genereId));
+        int nazioneId = Integer.parseInt(req.getParameter("nazioneId"));
 
-        film.setNazione(req.getParameter("nazione"));
+        Genere genere = genereRepository.findById(genereId);
+        Nazione nazione = nazioneRepository.findById(nazioneId);
+
+        film.setGenere(genere);
+        film.setNazione(nazione);
         film.setVintage(req.getParameter("vintage") != null);
         film.setCheckUscita(req.getParameter("checkUscita") != null);
 

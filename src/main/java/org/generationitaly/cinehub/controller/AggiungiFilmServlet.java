@@ -1,14 +1,15 @@
 package org.generationitaly.cinehub.controller;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityTransaction;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import org.generationitaly.cinehub.Util.JPAUtil;
 import org.generationitaly.cinehub.entity.Film;
 import org.generationitaly.cinehub.entity.Genere;
+import org.generationitaly.cinehub.entity.Nazione;
 import org.generationitaly.cinehub.repository.GenereRepository;
+import org.generationitaly.cinehub.repository.NazioneRepository;
+import org.generationitaly.cinehub.repository.FilmRepository;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -17,15 +18,19 @@ import java.util.List;
 @WebServlet("/AggiungiFilmServlet")
 public class AggiungiFilmServlet extends HttpServlet {
 
-    private GenereRepository genereRepository = new GenereRepository();
+    private final GenereRepository genereRepository = new GenereRepository();
+    private final NazioneRepository nazioneRepository = new NazioneRepository();
+    private final FilmRepository filmRepository = new FilmRepository();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        // Recupera i generi dal database e li passa alla JSP
         List<Genere> generi = genereRepository.findAll();
+        List<Nazione> nazioni = nazioneRepository.findAll();
+
         req.setAttribute("generi", generi);
+        req.setAttribute("nazioni", nazioni);
 
         req.getRequestDispatcher("/admin/aggiungiFilm.jsp").forward(req, resp);
     }
@@ -41,12 +46,12 @@ public class AggiungiFilmServlet extends HttpServlet {
         LocalDate dataUscita = LocalDate.parse(req.getParameter("dataUscita"));
         String locandina = req.getParameter("locandina");
         int genereId = Integer.parseInt(req.getParameter("genereId"));
-        String nazione = req.getParameter("nazione");
+        int nazioneId = Integer.parseInt(req.getParameter("nazioneId"));
         boolean vintage = req.getParameter("vintage") != null;
         boolean checkUscita = req.getParameter("checkUscita") != null;
 
-        // Recupera l’oggetto Genere associato
         Genere genere = genereRepository.findById(genereId);
+        Nazione nazione = nazioneRepository.findById(nazioneId);
 
         Film film = new Film();
         film.setTitolo(titolo);
@@ -60,12 +65,7 @@ public class AggiungiFilmServlet extends HttpServlet {
         film.setVintage(vintage);
         film.setCheckUscita(checkUscita);
 
-        EntityManager em = JPAUtil.getEntityManager();
-        EntityTransaction tx = em.getTransaction();
-        tx.begin();
-        em.persist(film);
-        tx.commit();
-        em.close();
+        filmRepository.save(film);
 
         resp.sendRedirect(req.getContextPath() + "/AggiungiFilmServlet");
     }
