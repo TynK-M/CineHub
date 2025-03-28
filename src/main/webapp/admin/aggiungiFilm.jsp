@@ -38,7 +38,7 @@
     </div>
     <div class="mb-3">
       <label class="form-label">Durata</label>
-      <input type="number" name="durata" class="form-control">
+      <input type="number" name="durata" class="form-control" min="0">
     </div>
     <div class="mb-3">
       <label class="form-label">Data Uscita</label>
@@ -48,10 +48,11 @@
       <label class="form-label">Locandina (link immagine)</label>
       <input type="text" name="locandina" class="form-control">
     </div>
-    <div class="mb-3">
-      <label class="form-label">Genere</label>
-      <input type="text" name="genere" class="form-control">
-    </div>
+    <select name="genereId" class="form-select" required>
+      <c:forEach var="genere" items="${generi}">
+        <option value="${genere.id}">${genere.nome}</option>
+      </c:forEach>
+    </select>
     <div class="mb-3">
       <label class="form-label">Nazione</label>
       <input type="text" name="nazione" class="form-control">

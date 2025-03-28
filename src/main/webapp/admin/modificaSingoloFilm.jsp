@@ -58,8 +58,15 @@
 
     <div class="mb-3">
       <label class="form-label">Genere</label>
-      <input type="text" name="genere" class="form-control" value="${film.genere}">
+      <select name="genereId" class="form-select" required>
+        <c:forEach var="genere" items="${generi}">
+          <option value="${genere.id}" ${genere.id == film.genere.id ? "selected" : ""}>
+              ${genere.nome}
+          </option>
+        </c:forEach>
+      </select>
     </div>
+
 
     <div class="mb-3">
       <label class="form-label">Nazione</label>
